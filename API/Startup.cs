@@ -38,6 +38,9 @@ namespace API
 
             });
             services.AddControllers();
+            services.AddCors();
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -57,6 +60,8 @@ namespace API
             app.UseHttpsRedirection(); //this will direct you to the endpoint
 
             app.UseRouting();//set up[ routing 
+            
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200") );//This is refered to as middleware; x is the policy that we are implementing 
 
             app.UseAuthorization();//havent configuresd auth
 
