@@ -1,0 +1,20 @@
+<div class="container mt-5">
+    <div *ngIf="!registerMode" style='text-align: center;'>
+    <H1>Find your match Today!</H1>
+    <P class="lead">Come to view your matches....All you need to do is sign up!</P>
+        <div class="text-center">
+            <button (click)="registerToggle()" class= "btn btn-primary btn-lg mr-2">Register</button>
+            <button class= "btn btn-primary btn-lg ">Learn More</button>
+        </div>
+    </div>
+
+    <div *ngIf="registerMode" class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <app-register  (cancelRegister)="cancelRegisterMode($event)"></app-register>            <!--Passing users from home to the register component (From home component to Register component)-->
+            </div>
+        </div>
+
+    </div>
+
+</div>

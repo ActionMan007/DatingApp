@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Dating App</a>
+          <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ |async"> <!--If this is true then show all those links -->
+            <li class="nav-item">                                       <!--If false then dont show them -->        
+              <a class="nav-link "  href="#">Matches</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="#" >Messages</a>
+            </li>
+           
+            </ul>       <!-- Telling this form element that this is going to be a form element-->                     
+                        <!-- # We give this form a template reference variable giving the form a name-->
+                        <!--This means that its an angular form-->
+          <div class="dropdown" *ngIf="accountService.currentUser$ | async"  dropdown>      <!--Functionality wont work because we need the angular bootstap-->
+              <a class="dropdown-toggle text-light" dropdownToggle>Welcome User</a>  <!--If user is logged in then show the dropdown menu-->
+              <div class="dropdown-menu mt-3" *dropdownMenu>    <!--There are 5 levels of mt-->
+                <a class="dropdown-item">Edit Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="logout()">Logout</a>     <!--Click event on the anchor tag to run the logout method-->
+              </div>
+
+          </div>
+
+
+          <form *ngIf="(accountService.currentUser$ | async)===null" #loginFom="ngForm" class="d-flex" (ngSubmit)="login()" 
+          autocomplete="off">     <!--User not logged in show the form, this will cause form to not exsist-->
+                                  <!--To hide something we use the prop hidden [hidden]="!loggedIn"-- ngIf is a structural Directive-->
+              <input              
+                     name="username"       
+                     [(ngModel)]="model.username"
+                     class="form-control me-2" 
+                     type="text" 
+                     placeholder="Username" >
+              <input 
+                     name="password"
+                     [(ngModel)]="model.password"
+                     class="form-control me-2" 
+                     type="password" 
+                     placeholder="Password" >
+            <button class="btn btn-outline-success" type="submit">Login</button>
+            <!--When we click enter or click on submit then the ngSubmit function works-->
+          </form>
+        </div>
+
+
+      
+     
+  </nav>
